@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Инициализация переменных
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация переменных
+
+```cpp
+int main()
+{
+    int x;    // объявление целочисленной переменной x (предпочтительный вариант)
+    int y, z; // объявление целочисленных переменных y, z
+
+    return 0;
+}
+```
+
+>Лучше всего объявлять одну переменную в строке.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Оператор присваивания
+
+```cpp
+int width; // объявление целочисленной переменной width
+width = 5; // присваивание значения 5 переменной width
+
+// теперь переменная width хранит значение 5
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Оператор присваивания
+
+```cpp
+#include <iostream>
+
+int main()
+{
+	int width; // объявление целочисленной переменной width
+	width = 5; // присваивание копированием значения 5 в переменную width
+
+	std::cout << width; // выводит 5
+
+	width = 7; // меняет значение, хранящееся в переменной width, в 7
+
+	std::cout << width; // выводит 7
+
+	return 0;
+}
+```
+
+**Вывод:** `57`
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация переменных
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int width { 5 };    // объявление и инициализация переменной width
+    std::cout << width; // выводит 5
+
+    return 0;
+}
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Виды инициализации
+
+```cpp
+int a;         // объявление без инициализации
+
+// Обычные способы инициализации:
+int b = 5;     // копирующая инициализация
+int c ( 6 );   // прямая инициализация
+
+// Современные способы инициализации (предпочтительно):
+int d { 7 };   // инициализация списком
+int e {};
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация по умолчанию
+
+Если инициализации нет (как в случае с переменной `a`), это называется **инициализацией по умолчанию**. В большинстве случаев она не выполняет никакой инициализации, оставляя переменной неопределенное значение, которое невозможно предсказать (иногда его называют "мусорным значением").
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Копирующая инициализация
+
+Когда после знака равенства задается начальное значение, это называется **копирующей инициализацией**. Этот метод был унаследован от языка Си.
+
+```cpp
+int width = 5;
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Прямая инициализация
+
+Когда начальное значение указано в круглых скобках, это называется **прямой инициализацией**.
+
+```cpp
+int width ( 5 );
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация списком
+
+Сегодня в C++ для создания объектов часто используют **инициализацию списком**.
+
+Инициализация списка может быть двух видов:
+
+```cpp
+int width { 5 };    // прямая инициализация списком. Значение 5 присваивается переменной width (предпочтительно)
+int height = { 6 }; // копирующая инициализация списком. Значение 6 присваивается переменной height (редко используется)
+```
+
+> Когда мы видим фигурные скобки, мы знаем, что инициализируем объект списком.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Преимущество инициализации списком
+
+Одно из главных преимуществ использования списков для инициализации в C++ — **запрет на сужающие преобразования**.
+
+```cpp
+    
+    int w1 { 4.5 }; // ошибка компиляции: list-init не позволяет сузить преобразование
+
+    int w2 = 4.5;   // компилируется: в w2 копируется значение 4
+    int w3 (4.5);   // компилируется: w3 инициализирована со значением 4
+
+    return 0;
+```
+
+> Обратите внимание, что это ограничение на сужающие преобразования применяется только к инициализации списка, а не к каким-либо последующим назначениям переменной.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация значением и нулевая инициализация
+
+При инициализации переменной с пустыми фигурными скобками применяется особая форма инициализации списка — **инициализация значения**. 
+
+Обычно в этом случае переменная автоматически получает значение нуля (или наиболее близкое к нулю значение для данного типа). Процесс обнуления называется **нулевой инициализацией**.
+
+> Для инициализации ваших переменных предпочитайте прямую инициализацию списком или значением.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Рекомендации экспертов
+
+Бьярн Страуструп (создатель C++) и Херб Саттер (эксперт по C++) также рекомендуют использовать list-initialization для инициализации ваших переменных.
+
+[C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-list)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## { 0 } или {}?
+
+> Используйте прямую инициализацию списка, когда вы на самом деле используете начальное значение:
+> ```cpp
+> int x { 0 };    // прямая инициализация значением 0
+> std::cout << x;  // выводим известное нам значение 0
+> ```
+> 	
+> Используйте инициализацию значением когда значение объекта является временным и будет заменено:
+> ```cpp
+> int x {};      // инициализация значением
+> std::cin >> x; //  сразу же меняем это значение
+> ```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Всегда инициализируйте свои переменные
+
+> Бьярн Страуструп (создатель C++) и Херб Саттер (эксперт по C++) сами дают эту рекомендацию здесь.
+
+[ES.20: Always initialize an object](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es20-always-initialize-an-object)
+
+> Инициализируйте свои переменные при создании.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Создание экземпляра
+
+Термин **"создание экземпляра"** - это модное слово, которое означает, что переменная была создана и инициализирована. Созданный объект называют **экземпляром**. Чаще всего этот термин применяется к объектам классов, но иногда он применяется и к объектам других типов.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Инициализация нескольких переменных
+
+В одной строке кода можно создать несколько переменных одного типа, разделив их имена запятой.
+
+```cpp
+int a, b; // создаём переменные a и b, но не инициализируем их
+```
+Лучше избегать этого синтаксиса. Вы можете инициализировать несколько переменных, определенных в одной строке:
+```cpp
+int a = 5, b = 6;          // copy-initialization
+int c ( 7 ), d ( 8 );      // direct-initialization
+int e { 9 }, f { 10 };     // direct-list-initialization
+int i {}, j {};            // value-initialization
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Распространенная ошибка
+
+```cpp
+int a, b = 5;     // неправильно: переменной "a" не присвоено значение 5
+int a = 5, b = 5; // правильно: "a" и "b" присвоено значение 5```
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Предупреждения о неиспользуемых переменных
+
+```cpp
+int main()
+{
+    int x { 5 }; // переменная "x" инициализирована
+
+    // но больше нигде не используется
+
+    return 0;
+}
+```
+
+При компиляции этого с помощью GCC генерируется следующее исключение:
+```
+prog.cc: In function 'int main()':
+prog.cc:3:9: error: unused variable 'x' [-Werror=unused-variable]
+```
+**Как исправить?**
+1. Если переменная не нужна, удалите её.
+2. Используйте переменную где-нибудь.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Атрибут \[\[maybe_unused\]\] (C++17)
+
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    // Какие-то физические значения, которые мы откуда-то скопировали
+    [[maybe_unused]] double pi { 3.14159 };
+    [[maybe_unused]] double gravity { 9.8 };
+    [[maybe_unused]] double phi { 1.61803 };
+
+    std::cout << pi << '\n';
+    std::cout << phi << '\n';
+
+    // Компилятор больше не будет предупреждать о том, что гравитация не используется
+
+    return 0;
+}
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Вопросы
+
+1.  В чем разница между инициализацией и присвоением?
+2.  Какую форму инициализации следует предпочитать, если вы хотите инициализировать переменную с определенным значением?
+3.  Что такое инициализация по умолчанию и инициализация по значению? Каково поведение каждого из них? Что из этого вы должны предпочитать?
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+	<style>
+		body {
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	</style>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
