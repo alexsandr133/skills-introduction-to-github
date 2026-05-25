@@ -1,0 +1,14 @@
+C:\Users\ST\.vscode\extensions\zartipov67\bin\Debug\net10.0\zartipov67.exe
+C:\Users\ST\.vscode\extensions\zartipov67\bin\Debug\net10.0\zartipov67.deps.json
+C:\Users\ST\.vscode\extensions\zartipov67\bin\Debug\net10.0\zartipov67.runtimeconfig.json
+C:\Users\ST\.vscode\extensions\zartipov67\bin\Debug\net10.0\zartipov67.dll
+C:\Users\ST\.vscode\extensions\zartipov67\bin\Debug\net10.0\zartipov67.pdb
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.AssemblyInfoInputs.cache
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.AssemblyInfo.cs
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.csproj.CoreCompileInputs.cache
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.dll
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\refint\zartipov67.dll
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.pdb
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\zartipov67.genruntimeconfig.cache
+C:\Users\ST\.vscode\extensions\zartipov67\obj\Debug\net10.0\ref\zartipov67.dll
